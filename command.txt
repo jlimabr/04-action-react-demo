@@ -2,6 +2,8 @@ npm install
 npm run dev : http://localhost:5173
 npm test
 npm run build
+npm outdated
+npm update
 
 #Job Output
 find dist/assets/*.js -type f -execdir echo '{}' ';'
