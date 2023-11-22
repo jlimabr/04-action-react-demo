@@ -5,11 +5,7 @@ cd .github/actons/deploy-s3-javascript
 npm init -y
 npm install @actions/core @actions/github @actions/exec
 
-in .gitignore
+in .gitignore 
 replace:
-node_modules
-dist
-
-to:
-/node_modules
-/dist
+node_modules and dist
+to: /node_modules and /dist
