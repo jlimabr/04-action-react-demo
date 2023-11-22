@@ -1,0 +1,15 @@
+https://docs.github.com/en/actions/creating-actions/metadata-syntax-for-github-actions
+https://github.com/actions/toolkit
+
+cd .github/actons/deploy-s3-javascript
+npm init -y
+npm install @actions/core @actions/github @actions/exec
+
+in .gitignore
+replace:
+node_modules
+dist
+
+to:
+/node_modules
+/dist
