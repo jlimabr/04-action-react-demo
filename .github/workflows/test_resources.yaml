@@ -3,15 +3,14 @@ on: push
 jobs:
     test:
       runs-on: ubuntu-latest
-    #   defaults:
-    #     run:
-    #       working-directory: src
+      defaults:
+        run:
+          working-directory: src
       steps:
           - name: Get code
             uses: actions/checkout@v4
             with:
-              sparse-checkout: |
-                src
+                path: src
 
           - name: List Files After
             run: ls -a
@@ -20,7 +19,6 @@ jobs:
             run: cat main.jsx
 
     deploy:
-      needs: test
       runs-on: ubuntu-latest
       steps:
         - name: Get code
