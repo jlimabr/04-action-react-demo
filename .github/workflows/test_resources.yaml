@@ -1,0 +1,28 @@
+name: Deploy Project
+on: push
+jobs:
+    test:
+      runs-on: ubuntu-latest
+      defaults:
+        run:
+          working-directory: src
+      steps:
+          - name: Get code
+            uses: actions/checkout@v4
+            with:
+              path: src
+
+          - name: List Files After
+            run: ls -a
+
+    deploy:
+      needs: test
+      runs-on: ubuntu-latest
+      steps:
+        - name: Get code
+          uses: actions/checkout@v4
+          with:
+            path: src/*
+
+        - name: List Files After
+          run: ls -a
