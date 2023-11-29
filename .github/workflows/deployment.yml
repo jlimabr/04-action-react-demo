@@ -1,11 +1,15 @@
 name: Deploy Project
-on: workflow_dispatch
+on: push
 jobs:
     test:
       runs-on: ubuntu-latest
       steps:
           - name: Get code
             uses: actions/checkout@v4
+
+          - name: List Files After
+            run: ls -a
+
           # It is not necessary because Ubuntu 22 is already pre-installed
           # https://github.com/actions/runner-images/blob/main/images/linux/Ubuntu2204-Readme.md
           # - name: Install NodeJS
@@ -22,6 +26,12 @@ jobs:
       steps:
         - name: Get code
           uses: actions/checkout@v4
+          with:
+            path: src
+
+        - name: List Files After
+          run: ls -a
+
         - name: Install dependencies
           run: npm ci 
         - name: Build project
