@@ -10,7 +10,7 @@ jobs:
         - name: Get code
           uses: actions/checkout@v4
           with:
-            path: src/**
+            path: src
 
         - name: List Files After
           run: ls -a
@@ -24,7 +24,7 @@ jobs:
         - name: Get code
           uses: actions/checkout@v4
           with:
-            path: src/**
+            path: src
 
         - name: List Files After
           run: ls -a
