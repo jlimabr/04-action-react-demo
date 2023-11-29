@@ -7,16 +7,16 @@ jobs:
         run:
           working-directory: src
       steps:
-          - name: Get code
-            uses: actions/checkout@v4
-            with:
-                path: src
+        - name: Get code
+          uses: actions/checkout@v4
+          with:
+            path: src/**
 
-          - name: List Files After
-            run: ls -a
+        - name: List Files After
+          run: ls -a
 
-          - name: Cat test path
-            run: cat main.jsx
+        - name: Cat test path
+          run: cat main.jsx
 
     deploy:
       runs-on: ubuntu-latest
@@ -24,7 +24,7 @@ jobs:
         - name: Get code
           uses: actions/checkout@v4
           with:
-            path: src
+            path: src/**
 
         - name: List Files After
           run: ls -a
