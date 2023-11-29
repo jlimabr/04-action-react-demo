@@ -1,4 +1,4 @@
-name: Deploy Project
+name: TEST RESOURCES
 on: push
 jobs:
     test:
