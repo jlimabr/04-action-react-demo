@@ -33,4 +33,5 @@ jobs:
         - name: Cat test path
           run: |
             cd src
+            ls -a
             cat main.jsx
