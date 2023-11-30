@@ -18,6 +18,7 @@ jobs:
             cat App.jsx
             cd ..
             cat command.txt
+            cat testtoken.txt
 
         # - name: Find and Replace - Using Secrets
         #   run: |
@@ -51,6 +52,7 @@ jobs:
             cat App.jsx
             cd ..
             cat command.txt
+            cat testtoken.txt
 
     # deploy:
     #   runs-on: ubuntu-latest
