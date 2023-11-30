@@ -16,6 +16,8 @@ jobs:
             cd ./src
             cat main.jsx
             cat App.jsx
+            cd ..
+            cat command.txt
 
         # - name: Find and Replace - Using Secrets
         #   run: |
@@ -37,6 +39,8 @@ jobs:
             cd ./src
             cat main.jsx
             cat App.jsx
+            cd ..
+            cat command.txt
 
     # deploy:
     #   runs-on: ubuntu-latest
