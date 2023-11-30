@@ -13,12 +13,16 @@ jobs:
 
         - name: Cat test path
           run: |
-            cd ./src
-            cat main.jsx
-            cat App.jsx
-            cd ..
+            echo "=============== command.txt ================"
             cat command.txt
+            cd ./src
+            echo "=============== main.jsx ================"
+            cat main.jsx
+            echo "=============== App.jsx ================"
+            cat App.jsx
+            echo "=============== testtoken.txt ================"
             cat testtoken.txt
+            
 
         # - name: Find and Replace - Using Secrets
         #   run: |
@@ -47,11 +51,14 @@ jobs:
 
         - name: Cat test path
           run: |
-            cd ./src
-            cat main.jsx
-            cat App.jsx
-            cd ..
+            echo "=============== command.txt ================"
             cat command.txt
+            cd ./src
+            echo "=============== main.jsx ================"
+            cat main.jsx
+            echo "=============== App.jsx ================"
+            cat App.jsx
+            echo "=============== testtoken.txt ================"
             cat testtoken.txt
 
     # deploy:
