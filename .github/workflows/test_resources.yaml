@@ -18,6 +18,7 @@ jobs:
 
         - name: Find and Replace - Using Secrets
           run: |
+            cd ./src
             find *.jsx -type f -exec sed -i ''s/#{SECCSTRING}#/${{ secrets.SECCSTRING }}/g'' {} \;
             find *.jsx -type f -exec sed -i ''s/#{VARCSTRING}#/${{ vars.VARCSTRING }}/g'' {} \;
 
