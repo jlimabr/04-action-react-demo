@@ -1,37 +1,44 @@
 name: TEST RESOURCES
 on: push
 jobs:
-    test:
-      runs-on: ubuntu-latest
-    #   defaults:
-    #     run:
-    #       working-directory: src
-      steps:
-        - name: Get code
-          uses: actions/checkout@v4
-          with:
-            path: src
-
-        - name: List Files After
-          run: ls -a
-
-        - name: Cat test path
-          run: cat main.jsx
-
-
-    deploy:
+    stage:
+      environment: stage
       runs-on: ubuntu-latest
       steps:
         - name: Get code
           uses: actions/checkout@v4
-          with:
-            path: src
 
         - name: List Files After
           run: ls -a
 
         - name: Cat test path
           run: |
-            cd src
-            ls -a
-            cat main.jsx
+            cd ./src
+            cat App.jsx
+
+        - name: Find and Replace - Using Secrets
+          run: |
+            find *.jsx -type f -exec sed -i ''s/#{SECCSTRING}#/${{ secrets.SECCSTRING }}/g'' {} \;
+            find *.jsx -type f -exec sed -i ''s/#{VARCSTRING}#/${{ vars.VARCSTRING }}/g'' {} \;
+
+        - name: Cat test path
+          run: |
+            cd ./src
+            cat App.jsx
+
+    # deploy:
+    #   runs-on: ubuntu-latest
+    #   steps:
+    #     - name: Get code
+    #       uses: actions/checkout@v4
+    #       with:
+    #         path: src
+
+    #     - name: List Files After
+    #       run: ls -a
+
+    #     - name: Cat test path
+    #       run: |
+    #         cd src
+    #         ls -a
+    #         cat main.jsx
