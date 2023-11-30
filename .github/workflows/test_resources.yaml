@@ -25,14 +25,24 @@ jobs:
         #     find App.jsx -type f -exec sed -i "s/#{SECCSTRING}#/${{ secrets.SECCSTRING }}/g" {} \;
         #     find *.jsx -type f -exec sed -i "s/#{VARCSTRING}#/${{ vars.VARCSTRING }}/g" {} \;
 
-        - name: Setting up config file
-          uses: BlobDevelopment/copy-and-replace-tokens@v1
+        # - name: Setting up config file
+        #   uses: BlobDevelopment/copy-and-replace-tokens@v1
+        #   with:
+        #     source: 'command.txt.token'
+        #     target: 'command.txt'
+        #   env:
+        #     SECCSTRING: ${{ secrets.SECCSTRING }}
+        #     VARCSTRING: ${{ vars.VARCSTRING }}
+
+        - uses: cschleiden/replace-tokens@v1
           with:
-            source: 'command.txt.token'
-            target: 'command.txt'
+            tokenPrefix: '#{'
+            tokenSuffix: '}#'
+            files: '["**/*.txt"]'
           env:
             SECCSTRING: ${{ secrets.SECCSTRING }}
             VARCSTRING: ${{ vars.VARCSTRING }}
+
 
         - name: Cat test path
           run: |
