@@ -16,22 +16,27 @@ jobs:
             cd ./src
             cat main.jsx
             cat App.jsx
-            cd ./components
-            cat HelpBox.jsx
 
-        - name: Find and Replace - Using Secrets
-          run: |
-            cd ./src
-            find *.jsx -type f -exec sed -i "s/#{SECCSTRING}#/${{ secrets.SECCSTRING }}/g" {} \;
-            find *.jsx -type f -exec sed -i "s/#{VARCSTRING}#/${{ vars.VARCSTRING }}/g" {} \;
+        # - name: Find and Replace - Using Secrets
+        #   run: |
+        #     cd ./src
+        #     find App.jsx -type f -exec sed -i "s/#{SECCSTRING}#/${{ secrets.SECCSTRING }}/g" {} \;
+        #     find *.jsx -type f -exec sed -i "s/#{VARCSTRING}#/${{ vars.VARCSTRING }}/g" {} \;
+
+        - name: Setting up config file
+          uses: BlobDevelopment/copy-and-replace-tokens@v1
+          with:
+            source: 'App.jsx.token'
+            target: 'App.jsx'
+          env:
+            SECCSTRING: ${{ secrets.SECCSTRING }}
+            VARCSTRING: ${{ vars.VARCSTRING }}
 
         - name: Cat test path
           run: |
             cd ./src
             cat main.jsx
             cat App.jsx
-            cd ./components
-            cat HelpBox.jsx
 
     # deploy:
     #   runs-on: ubuntu-latest
