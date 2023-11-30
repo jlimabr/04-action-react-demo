@@ -14,7 +14,10 @@ jobs:
         - name: Cat test path
           run: |
             cd ./src
+            cat main.jsx
             cat App.jsx
+            cd ./components
+            cat HelBox.jsx
 
         - name: Find and Replace - Using Secrets
           run: |
@@ -25,7 +28,10 @@ jobs:
         - name: Cat test path
           run: |
             cd ./src
+            cat main.jsx
             cat App.jsx
+            cd ./components
+            cat HelBox.jsx
 
     # deploy:
     #   runs-on: ubuntu-latest
