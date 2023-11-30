@@ -13,14 +13,14 @@ jobs:
 
         - name: Cat test path
           run: |
-            echo "=============== command.txt ================"
+            printf  "\n=============== command.txt ================\n"
             cat command.txt
             cd ./src
-            echo "=============== main.jsx ================"
+            printf  "\n=============== main.jsx ================\n"
             cat main.jsx
-            echo "=============== App.jsx ================"
+            printf  "\n=============== App.jsx ================\n"
             cat App.jsx
-            echo "=============== testtoken.txt ================"
+            printf "\n=============== testtoken.txt ================\n"
             cat testtoken.txt
             
 
@@ -43,7 +43,7 @@ jobs:
           with:
             tokenPrefix: '#{'
             tokenSuffix: '}#'
-            files: '["**/*.txt"]'
+            files: '["**/*.txt","src/**/*.txt"]'
           env:
             SECCSTRING: ${{ secrets.SECCSTRING }}
             VARCSTRING: ${{ vars.VARCSTRING }}
@@ -51,14 +51,14 @@ jobs:
 
         - name: Cat test path
           run: |
-            echo "=============== command.txt ================"
+            printf  "\n=============== command.txt ================\n"
             cat command.txt
             cd ./src
-            echo "=============== main.jsx ================"
+            printf  "\n=============== main.jsx ================\n"
             cat main.jsx
-            echo "=============== App.jsx ================"
+            printf  "\n=============== App.jsx ================\n"
             cat App.jsx
-            echo "=============== testtoken.txt ================"
+            printf "\n=============== testtoken.txt ================\n"
             cat testtoken.txt
 
     # deploy:
