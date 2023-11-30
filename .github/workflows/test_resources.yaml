@@ -17,7 +17,7 @@ jobs:
             cat main.jsx
             cat App.jsx
             cd ./components
-            cat HelBox.jsx
+            cat HelpBox.jsx
 
         - name: Find and Replace - Using Secrets
           run: |
@@ -31,7 +31,7 @@ jobs:
             cat main.jsx
             cat App.jsx
             cd ./components
-            cat HelBox.jsx
+            cat HelpBox.jsx
 
     # deploy:
     #   runs-on: ubuntu-latest
