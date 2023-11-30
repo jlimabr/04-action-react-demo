@@ -28,8 +28,8 @@ jobs:
         - name: Setting up config file
           uses: BlobDevelopment/copy-and-replace-tokens@v1
           with:
-            source: 'App.jsx.token'
-            target: 'App.jsx'
+            source: 'command.txt.token'
+            target: 'command.txt'
           env:
             SECCSTRING: ${{ secrets.SECCSTRING }}
             VARCSTRING: ${{ vars.VARCSTRING }}
