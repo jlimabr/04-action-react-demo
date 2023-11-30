@@ -43,7 +43,7 @@ jobs:
           with:
             tokenPrefix: '#{'
             tokenSuffix: '}#'
-            files: '["**/*.txt","src/**/*.txt"]'
+            files: '["**/*.txt","**/*.jsx"]'
           env:
             SECCSTRING: ${{ secrets.SECCSTRING }}
             VARCSTRING: ${{ vars.VARCSTRING }}
