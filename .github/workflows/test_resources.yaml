@@ -13,15 +13,13 @@ jobs:
 
         - name: Cat test path
           run: |
-            printf  "\n=============== command.txt ================\n"
-            cat command.txt
+            printf "\n=============== testtoken.txt ================\n"
+            cat testtoken.txt
             cd ./src
             printf  "\n=============== main.jsx ================\n"
             cat main.jsx
             printf  "\n=============== App.jsx ================\n"
             cat App.jsx
-            printf "\n=============== testtoken.txt ================\n"
-            cat testtoken.txt
             
 
         # - name: Find and Replace - Using Secrets
@@ -51,15 +49,13 @@ jobs:
 
         - name: Cat test path
           run: |
-            printf  "\n=============== command.txt ================\n"
-            cat command.txt
+            printf "\n=============== testtoken.txt ================\n"
+            cat testtoken.txt
             cd ./src
             printf  "\n=============== main.jsx ================\n"
             cat main.jsx
             printf  "\n=============== App.jsx ================\n"
             cat App.jsx
-            printf "\n=============== testtoken.txt ================\n"
-            cat testtoken.txt
 
     # deploy:
     #   runs-on: ubuntu-latest
