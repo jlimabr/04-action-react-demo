@@ -13,6 +13,8 @@ jobs:
             cd ./src/wazuh/wazuh_managers/integrations
             printf "\n\n=============== List files ================\n"
             ls -a
+            printf "\n\n=============== clear file ================\n"
+            truncate -s 0 custom-opsgenie
             printf "\n\n=============== custom-opsgenie ================\n"
             cat custom-opsgenie
 
