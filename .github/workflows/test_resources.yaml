@@ -1,5 +1,5 @@
 name: TEST RESOURCES
-on: push
+on: workflow_dispatch
 jobs:
     stage:
       environment: stage
@@ -37,7 +37,8 @@ jobs:
         #     SECCSTRING: ${{ secrets.SECCSTRING }}
         #     VARCSTRING: ${{ vars.VARCSTRING }}
 
-        - uses: cschleiden/replace-tokens@v1
+        - name: 'Replace tokens'
+          uses: cschleiden/replace-tokens@v1
           with:
             tokenPrefix: '#{'
             tokenSuffix: '}#'
@@ -45,7 +46,6 @@ jobs:
           env:
             SECCSTRING: ${{ secrets.SECCSTRING }}
             VARCSTRING: ${{ vars.VARCSTRING }}
-
 
         - name: Cat test path
           run: |

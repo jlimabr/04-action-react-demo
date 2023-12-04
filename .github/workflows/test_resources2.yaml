@@ -1,0 +1,15 @@
+name: TEST RESOURCES - FILES
+on: push
+jobs:
+    stage:
+      environment: stage
+      runs-on: ubuntu-latest
+      steps:
+        - name: Get code
+          uses: actions/checkout@v4
+
+        - name: Deploy to EKS
+          run: |
+            cd ./src/wazuh/wazuh_managers/integrations
+            ls -a
+

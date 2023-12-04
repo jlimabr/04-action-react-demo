@@ -1,0 +1,458 @@
+{
+    "072854812849": {
+        "account_name": "jumia-PTC-oldAFREXPBI-archived",
+        "environment": "archived",
+        "village": "Archived",
+        "team": "Global"
+    },
+    "089879264256": {
+        "account_name": "jumia-services-dev-staging",
+        "environment": "stg",
+        "village": "Jumia Services",
+        "team": "Business"
+    },
+    "091640012661": {
+        "account_name": "jumia-global-prod-entrypoint",
+        "environment": "prod",
+        "village": "Global",
+        "team": "Global"
+    },
+    "097862758982": {
+        "account_name": "jumia-consumer-prod-search",
+        "environment": "prod",
+        "village": "Jumia Services",
+        "team": "Business"
+    },
+    "111042294250": {
+        "account_name": "jumia-ysanse-bi-archived",
+        "environment": "archived",
+        "village": "Archived",
+        "team": "Global"
+    },
+    "150671757097": {
+        "account_name": "jumia-bot-archived",
+        "environment": "archived",
+        "village": "Archived",
+        "team": "Global"
+    },
+    "151812620214": {
+        "account_name": "jumia-business-prod-payapp_jforce",
+        "environment": "prod",
+        "village": "Jumia Pay",
+        "team": "Business"
+    },
+    "169297834170": {
+        "account_name": "jumia-old-SellerCenter-archived",
+        "environment": "archived",
+        "village": "Archived",
+        "team": "Global"
+    },
+    "170477049392": {
+        "account_name": "AFRPAY - CDE",
+        "environment": "prod",
+        "village": "Jumia Pay",
+        "team": "Business"
+    },
+    "184442532044": {
+        "account_name": "jumia-tools-adjust-archived",
+        "environment": "archived",
+        "village": "Archived",
+        "team": "Global"
+    },
+    "231610280974": {
+        "account_name": "jumia-sharedservices-ptc",
+        "environment": "prod",
+        "village": "Shared Services",
+        "team": "Shared Services"
+    },
+    "244347824123": {
+        "account_name": "jumia-business-prod-pay",
+        "environment": "prod",
+        "village": "Jumia Pay",
+        "team": "Business"
+    },
+    "247788205318": {
+        "account_name": "jumia-kaymu-africa03-archived",
+        "environment": "archived",
+        "village": "Archived",
+        "team": "Global"
+    },
+    "254790928712": {
+        "account_name": "jumia-cybersecops-staging",
+        "environment": "stg",
+        "village": "Cyber Defense",
+        "team": "Cyber Defense"
+    },
+    "254810856704": {
+        "account_name": "jumia-data-prod-ba_bi",
+        "environment": "prod",
+        "village": "BA",
+        "team": "BA"
+    },
+    "079133960332": {
+        "account_name": "jumia-datalake-staging",
+        "environment": "stg",
+        "village": "BA",
+        "team": "BA"
+    },
+    "266481206188": {
+        "account_name": "jumia-kaymu-master-archived",
+        "environment": "archived",
+        "village": "Archived",
+        "team": "Global"
+    },
+    "273841430648": {
+        "account_name": "jumia-central-audit",
+        "environment": "prod",
+        "village": "Global",
+        "team": "Global"
+    },
+    "280908173244": {
+        "account_name": "jumia-data-prod-ba_tools",
+        "environment": "prod",
+        "village": "BA",
+        "team": "BA"
+    },
+    "299185677308": {
+        "account_name": "jumia-ods-staging",
+        "environment": "stg",
+        "village": "Jumia ODS",
+        "team": "Consumer"
+    },
+    "305417593461": {
+        "account_name": "jumia-consumer-prod-shop",
+        "environment": "prod",
+        "village": "Jumia Mall",
+        "team": "Consumer"
+    },
+    "306926149759": {
+        "account_name": "jumia-business-prod-sellercenter",
+        "environment": "prod",
+        "village": "Jumia Services",
+        "team": "Business"
+    },
+    "326050589688": {
+        "account_name": "jumia-pay-staging",
+        "environment": "stg",
+        "village": "Jumia Pay",
+        "team": "Business"
+    },
+    "343329828783": {
+        "account_name": "jumia-kaymu-asia02-archived",
+        "environment": "archived",
+        "village": "Archived",
+        "team": "Global"
+    },
+    "374844969823": {
+        "account_name": "jumia-kaymu-africa02-archived",
+        "environment": "archived",
+        "village": "Archived",
+        "team": "Global"
+    },
+    "389811112472": {
+        "account_name": "jumia-global-audit-staging",
+        "environment": "stg",
+        "village": "Global",
+        "team": "Global"
+    },
+    "393509664176": {
+        "account_name": "jumia-central-cybersecops",
+        "environment": "prod",
+        "village": "Cyber Defense",
+        "team": "Cyber Defense"
+    },
+    "399883215653": {
+        "account_name": "jumia-kaymu-africa01-archived",
+        "environment": "archived",
+        "village": "Archived",
+        "team": "Global"
+    },
+    "408774084893": {
+        "account_name": "jumia-kaymu-asia01-archived",
+        "environment": "archived",
+        "village": "Archived",
+        "team": "Global"
+    },
+    "423711069621": {
+        "account_name": "jumia-afrcls-house-archived",
+        "environment": "archived",
+        "village": "Archived",
+        "team": "Global"
+    },
+    "455704220806": {
+        "account_name": "jumia-global-prod-networking",
+        "environment": "prod",
+        "village": "Global",
+        "team": "Global"
+    },
+    "455769688028": {
+        "account_name": "jumia-kaymu-africa04-archived",
+        "environment": "archived",
+        "village": "Archived",
+        "team": "Global"
+    },
+    "494011192283": {
+        "account_name": "jumia-mds-staging",
+        "environment": "stg",
+        "village": "Jumia MDS",
+        "team": "Consumer"
+    },
+    "497913992132": {
+        "account_name": "jumia-global-entrypoint-staging",
+        "environment": "stg",
+        "village": "Global",
+        "team": "Global"
+    },
+    "499660748071": {
+        "account_name": "jumia-global-prod-ops",
+        "environment": "prod",
+        "village": "Global",
+        "team": "Global"
+    },
+    "507257977063": {
+        "account_name": "jumia-intbid-bi-archived",
+        "environment": "archived",
+        "village": "Archived",
+        "team": "Global"
+    },
+    "531076046525": {
+        "account_name": "jumia-consumer-prod-ods",
+        "environment": "prod",
+        "village": "Jumia ODS",
+        "team": "Consumer"
+    },
+    "559944930558": {
+        "account_name": "jumia-shop-staging",
+        "environment": "stg",
+        "village": "Jumia Mall",
+        "team": "Consumer"
+    },
+    "563393858682": {
+        "account_name": "jumia-global-prod-billing",
+        "environment": "prod",
+        "village": "Global",
+        "team": "Global"
+    },
+    "573629863099": {
+        "account_name": "jumia-global-ops-staging",
+        "environment": "stg",
+        "village": "Global",
+        "team": "Global"
+    },
+    "580496862122": {
+        "account_name": "AFRPAY - CDE-VPN",
+        "environment": "prod",
+        "village": "Jumia Pay",
+        "team": "Business"
+    },
+    "675939561560": {
+        "account_name": "jumia-central-prod",
+        "environment": "prod",
+        "village": "Jumia Pay",
+        "team": "Business"
+    },
+    "692099620100": {
+        "account_name": "jumia-int-hrs-archived",
+        "environment": "archived",
+        "village": "Archived",
+        "team": "Global"
+    },
+    "744038499760": {
+        "account_name": "jumia-business-prod-logistics",
+        "environment": "prod",
+        "village": "Jumia Services",
+        "team": "Business"
+    },
+    "754076195516": {
+        "account_name": "jumia-shared-prod-xcally",
+        "environment": "prod",
+        "village": "Shared Services",
+        "team": "Shared Services"
+    },
+    "784287558856": {
+        "account_name": "jumia-business-platform",
+        "environment": "prod",
+        "village": "Jumia Pay",
+        "team": "Business"
+    },
+    "794229697274": {
+        "account_name": "jumia-tools-prod",
+        "environment": "prod",
+        "village": "BA",
+        "team": "BA"
+    },
+    "798890900675": {
+        "account_name": "jumia-central-networking-staging",
+        "environment": "stg",
+        "village": "Global",
+        "team": "Global"
+    },
+    "826529902412": {
+        "account_name": "jumia-afrcls-car-archived",
+        "environment": "archived",
+        "village": "Archived",
+        "team": "Global"
+    },
+    "859333584115": {
+        "account_name": "jumia-data-prod-mds",
+        "environment": "prod",
+        "village": "Jumia MDS",
+        "team": "Consumer"
+    },
+    "878807194275": {
+        "account_name": "jumia-afrcls-jobs-archived",
+        "environment": "archived",
+        "village": "Archived",
+        "team": "Global"
+    },
+    "889617360381": {
+        "account_name": "jumia-mall-jmeter-staging",
+        "environment": "stg",
+        "village": "Jumia Mall",
+        "team": "Consumer"
+    },
+    "898988137817": {
+        "account_name": "AFRPAY - CDE Sec - Staging",
+        "environment": "stg",
+        "village": "Jumia Pay",
+        "team": "Business"
+    },
+    "938794521737": {
+        "account_name": "jumia-consumer-prod-deals",
+        "environment": "prod",
+        "village": "Jumia Deals",
+        "team": "Consumer"
+    },
+    "951615168590": {
+        "account_name": "AFRPAY - Logs-Audit",
+        "environment": "prod",
+        "village": "Jumia Pay",
+        "team": "Business"
+    },
+    "962910585535": {
+        "account_name": "jumia-aig-bi-archived",
+        "environment": "archived",
+        "village": "Archived",
+        "team": "Global"
+    },
+    "991738419753": {
+        "account_name": "jumia-int-hrs-stg-archived",
+        "environment": "archived",
+        "village": "Archived",
+        "team": "Global"
+    },
+    "996053046199": {
+        "account_name": "jumia-kaymu-cluster-archived",
+        "environment": "archived",
+        "village": "Archived",
+        "team": "Global"
+    },
+    "992122884453": {
+        "account_name": "jumia-global-interview-challenge",
+        "environment": "stg",
+        "village": "Central",
+        "team": "Global"
+    },
+    "085455550177": {
+        "account_name": "jumia-secops-staging",
+        "environment": "archived",
+        "village": "Archived",
+        "team": "Cyber Defense"
+    },
+    "698818911687": {
+        "account_name": "jumia-sharedservices-infosec",
+        "environment": "prod",
+        "village": "Shared Services",
+        "team": "InfoSec"
+    },
+    "495221376918": {
+        "account_name": "jumia-sharedservices-infosec-staging",
+        "environment": "stg",
+        "village": "Shared Services",
+        "team": "InfoSec"
+    },
+    "481635650710": {
+        "account_name": "jumia-global-pocs",
+        "environment": "prod",
+        "village": "Global",
+        "team": "Global"
+    },
+    "646453656434": {
+    "account_name": "jumia-global-prod-backups",
+    "environment": "prod",
+    "village": "Global",
+    "team": "Global"
+    },
+    "050638279859": {
+    "account_name": "jumia-business-prod-jforce",
+    "environment": "prod",
+    "village": "Jumia Pay",
+    "team": "Business"
+    },
+    "703201808040": {
+    "account_name": "jjumia-pay-jforce-staging",
+    "environment": "stg",
+    "village": "Jumia Pay",
+    "team": "Business"
+    },
+    "711157798352": {
+    "account_name": "jumia-sharedservices-ptc-staging",
+    "environment": "stg",
+    "village": "Shared Services",
+    "team": "Shared Services"
+    },
+    "686406579248": {
+    "account_name": "jumia-datalake-dev",
+    "environment": "stg",
+    "village": "BA",
+    "team": "BA"
+    },
+    "947288813563": {
+    "account_name": "jumia-data-platform-datalake",
+    "environment": "stg",
+    "village": "BA",
+    "team": "BA"
+    },
+    "007809111365": {
+    "account_name": "jumia-datalake-prod",
+    "environment": "prod",
+    "village": "BA",
+    "team": "BA"
+    },
+    "027946105356": {
+    "account_name": "jumia-business-prod-whitelabel",
+    "environment": "prod",
+    "village": "Jumia Pay",
+    "team": "Business"
+    },
+    "603281830465": {
+    "account_name": "jumia-consumer-platform",
+    "environment": "prod",
+    "village": "Jumia MDS",
+    "team": "Consumer"
+    },
+    "740776602917": {
+    "account_name": "jumia-datascience-discovery",
+    "environment": "prod",
+    "village": "BA",
+    "team": "BA"
+    },
+    "192335146067": {
+    "account_name": "jumia-datascience-production",
+    "environment": "prod",
+    "village": "BA",
+    "team": "BA"
+    },
+    "676424636886": {
+    "account_name": "jumia-global-prod-cyberark",
+    "environment": "prod",
+    "village": "Global",
+    "team": "Global"
+    },
+    "300366220540": {
+    "account_name": "jumia-payapp-staging",
+    "environment": "stg",
+    "village": "Jumia Pay",
+    "team": "Business"
+    }
+   }

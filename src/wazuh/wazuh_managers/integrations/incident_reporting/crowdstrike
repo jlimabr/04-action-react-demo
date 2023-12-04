@@ -1,0 +1,205 @@
+from importlib.util import spec_from_loader, module_from_spec
+from importlib.machinery import SourceFileLoader
+from dateutil import tz
+import requests
+import json
+import datetime
+import pytz
+import os
+import re
+spec = spec_from_loader("slack_issues", SourceFileLoader("slack_issues", "/var/ossec/integrations/incident_reporting/jira"))
+slack_issues = module_from_spec(spec)
+spec.loader.exec_module(slack_issues)
+from_zone = tz.gettz('UTC')
+to_zone = tz.gettz('Europe/Lisbon')
+headers = { "Content-Type": "application/json" }
+user = os.environ.get('jira_user').replace('\n', '')
+api_key = os.environ.get('jira_api_key').replace('\n', '')
+def parse(log):
+    # Jira Ticket Structure
+    source = "Crowdstrike"
+    siem_id = log['id']
+    summary = log['rule']['description']
+    title = summary
+    village = 'Cyber Defense'
+    team = 'Cyber Defense'
+    first_seen = datetime.datetime.strptime(log['data']['date_updated'], '%Y-%m-%dT%H:%M:%SZ').replace(tzinfo=from_zone).astimezone(to_zone)
+    first_detected = datetime.datetime.strptime(log['timestamp'].split('+')[0].split('.')[0], '%Y-%m-%dT%H:%M:%S').replace(tzinfo=from_zone).astimezone(to_zone)
+    last_seen = datetime.datetime.strptime(log['data']['date_updated'], '%Y-%m-%dT%H:%M:%SZ').replace(tzinfo=from_zone).astimezone(to_zone)
+    category = 'Other'
+    subcategory = 'Uncategorized'
+    impact = '4 - Low'
+    urgency = '4 - Low'
+    hostname = log['data']['device']['hostname']
+    behaviors = log['data']['behaviors']
+    filepath = behaviors[0]['filepath']
+    severity = log['data']['max_severity_displayname']
+    description_crowdstrike = behaviors[0]['description']
+    separator = '.'
+    description_crowdstrike = description_crowdstrike.split(separator, 1)[0] + separator
+    # Pattern Behaviors
+    kill_process = behaviors[0]['pattern_disposition_details']['kill_process']
+    quarantine_file = behaviors[0]['pattern_disposition_details']['quarantine_file']
+    kill_parent = behaviors[0]['pattern_disposition_details']['kill_parent']
+    operation_blocked = behaviors[0]['pattern_disposition_details']['operation_blocked']
+    process_blocked = behaviors[0]['pattern_disposition_details']['process_blocked']
+    registry_operation_blocked = behaviors[0]['pattern_disposition_details']['registry_operation_blocked']
+    fs_operation_blocked = behaviors[0]['pattern_disposition_details']['fs_operation_blocked']
+
+    
+    description = ''
+    description += '*Summary:* ' + description_crowdstrike + '\n'
+    description += '*Log Source:* ' + source + '\n'
+    description += '*SIEM ID/s:* ' + siem_id + '\n\n'
+    description += '*First seen:* ' + str(first_seen) + '\n'
+    description += '*First detected:* ' + str(first_detected) + '\n'
+    description += '*Last seen:* ' + str(last_seen) + '\n\n'
+    description += '*Target/s:* ' + hostname + "\n"
+    description += '*Threat Actor/s:* N/A\n'
+    description += '*Pre-analysis:* Crowdstrike has detected a suspicious process/file being executed on host ' + hostname + '.'
+    issue_key = slack_issues.create_issue(title, village, team, first_seen, first_detected, category, subcategory, impact, urgency, description)
+    if issue_key is None:
+        update_response = 'Failed to create issue.*'
+    else:
+        update_response = '*Issue created:* https://jira.jumia.com/browse/' + issue_key
+    description += update_response
+    
+    if str(operation_blocked) == 'True' or str(process_blocked) == 'True' or str(kill_process) == 'True' or str(quarantine_file) == 'True' or str(kill_parent) == 'True' or str(registry_operation_blocked) == 'True' or str(fs_operation_blocked) == 'True':
+        # EDIT SECURITY IMPACT AND URGENCY ACCORDING TO LOW, SINCE IT'S AUTOMATICALLY MITIGATED (SOX Compliance)
+        update = {"fields": {"customfield_15012": {"value": "4 - Low"}, "customfield_15008": {"value": "4 - Low"}}}
+        update_ticket_response = requests.put('https://jira.jumia.com/rest/api/latest/issue/' + issue_key, data=json.dumps(update), headers=headers, auth=(user, api_key))
+    
+        # Input a commentary to trigger the Jira's Priority Automation
+        update = {}
+        comment = 'h3. *Priority Update*\nCrowdstrike detected the priority of the incident as ' + severity + '. Since it was automatically mitigated, this ticket was classified as:\n'
+        comment += 'Urgency - Low \nSecurity Impact - Low' 
+        update['body'] = {}
+        update['body'] = comment
+        update_ticket_response = requests.post('https://jira.jumia.com/rest/api/latest/issue/' + issue_key + '/comment', data=json.dumps(update), headers=headers, auth=(user, api_key))
+        
+        # ASSIGNE ISSUE TO CYBER DEFENSE BOT (Edit Issue)
+        update = {"name": "cyberdefensebot"}
+        updated_ticket_response = requests.put('https://jira.jumia.com/rest/api/latest/issue/' + issue_key + '/assignee', data=json.dumps(update), headers=headers, auth=(user, api_key))
+        # DRAFT => ANALYSIS (Transition ticket)
+        update = {}
+        update['transition'] = {}
+        update['transition']['id'] = '31'
+        update_ticket_response = requests.post('https://jira.jumia.com/rest/api/latest/issue/' + issue_key + '/transitions', data=json.dumps(update), headers=headers, auth=(user, api_key))
+        # ANALYSIS => CONTAINMENT (Transition Ticket)
+        update = {}
+        update['transition'] = {}
+        update['transition']['id'] = '101'
+        analysis = 'Analysis revealed that the infected host is ' + hostname + '. The suspicious process/file was located at ' + filepath + '.'
+        update['fields'] = {}
+        update['fields']['customfield_15016'] = analysis
+        update['update'] = {}
+        update['update']['comment'] = []
+        comment = {}
+        comment['add'] = {}
+        comment['add']['body'] = 'h3. *Analysis* \n' + analysis
+        update['update']['comment'].append(comment)
+        update_ticket_response = requests.post('https://jira.jumia.com/rest/api/latest/issue/' + issue_key + '/transitions', data=json.dumps(update), headers=headers, auth=(user, api_key))
+        # EDIT CATEGORY (Edit Issue)
+        update = {"fields": {"customfield_15007": {"child": {"value": "Nondescript"}, "value": "Malware"}}}
+        update_ticket_response = requests.put('https://jira.jumia.com/rest/api/latest/issue/' + issue_key, data=json.dumps(update), headers=headers, auth=(user, api_key))
+        # CONTAINMENT => ERADICATION & RECOVERY (Transition Ticket)
+        update = {}
+        update['transition'] = {}
+        update['transition']['id'] = '111'
+        containment = 'An automatic mitigation was performed by Crowdstrike Falcon(EDR).'
+        update['fields'] = {}
+        update['fields']['customfield_15016'] = containment
+        update['update'] = {}
+        update['update']['comment'] = []
+        comment = {}
+        comment['add'] = {}
+        comment['add']['body'] = 'h3. *Containment* \n' + containment
+        update['update']['comment'].append(comment)
+        update_ticket_response = requests.post('https://jira.jumia.com/rest/api/latest/issue/' + issue_key + '/transitions', data=json.dumps(update), headers=headers, auth=(user, api_key))
+        # ERADICATION & RECOVERY => POST-INCIDENT ACTIVITY (Transition Ticket)
+        update = {}
+        update['transition'] = {}
+        update['transition']['id'] = '241'
+        eradication_recovery = 'N/A'
+        update['fields'] = {}
+        update['fields']['customfield_15016'] = 'Eradication & Recovery:' + eradication_recovery
+        update['update'] = {}
+        update['update']['comment'] = []
+        comment = {}
+        comment['add'] = {}
+        comment['add']['body'] = 'h3. *Eradication & Recovery* \n' + eradication_recovery
+        update['update']['comment'].append(comment)
+        update_ticket_response = requests.post('https://jira.jumia.com/rest/api/latest/issue/' + issue_key + '/transitions', data=json.dumps(update), headers=headers, auth=(user, api_key))
+        # POST-INCIDENT ACTIVITY => RESOLUTION & CLOSURE (Transition Ticket)
+        update = {}
+        update['transition'] = {}
+        update['transition']['id'] = '141'
+        update['fields'] = {}
+        # Exactly what happened, and at what times?
+        postactivity = first_seen.strftime('%d/%b/%Y %H:%M') + ' - Crowdstrike Falcon(EDR) detected suspicious file/process running on the host ' + hostname + '\n'
+        postactivity += first_detected.strftime('%d/%b/%Y %H:%M') + ' - An automatic mitigation was performed by Crowdstrike Falcon(EDR).'
+        update['fields']['customfield_15017'] = postactivity
+        # Was the documentation adequate?
+        update['fields']['customfield_15018'] = 'Yes'
+        # Were any steps or actions taken that might have inhibited the recovery?
+        update['fields']['customfield_15019'] = 'N/A'
+        # What improvements could be applied in order to prevent it in the future?
+        update['fields']['customfield_15020'] = 'N/A'
+        # Close Code
+        update['fields']['customfield_15021'] = {}
+        update['fields']['customfield_15021']['value'] = 'Solved (Permanently)'
+        # Root cause
+        update['fields']['customfield_15022'] = {}
+        update['fields']['customfield_15022']['value'] = 'Security Event'
+        # Steps Taken
+        steps = 'Detection and mitigation were automatically performed by Crowdstrike Falcon(EDR).'
+        update['fields']['customfield_15023'] = steps
+        # Outage
+        update['fields']['customfield_15024'] = {}
+        update['fields']['customfield_15024']['value'] = 'No Outage'
+        # Recurring incident?
+        update['fields']['customfield_15025'] = {}
+        update['fields']['customfield_15025']['value'] = 'No'
+        # False positive?
+        update['fields']['customfield_15026'] = {}
+        update['fields']['customfield_15026']['value'] = 'No'
+        # Control need update?
+        update['fields']['customfield_15027'] = {}
+        update['fields']['customfield_15027']['value'] = 'No'
+        # Improvement needed?
+        update['fields']['customfield_15028'] = {}
+        update['fields']['customfield_15028']['value'] = 'No'
+        # Communication issue?
+        update['fields']['customfield_15030'] = {}
+        update['fields']['customfield_15030']['value'] = 'No'
+        # Procedure needs update?
+        update['fields']['customfield_15031'] = {}
+        update['fields']['customfield_15031']['value'] = 'No'
+        #Resolution Comment
+        update['update'] = {}
+        update['update']['comment'] = []
+        comment = {}
+        comment['add'] = {}
+        comment['add']['body'] = 'h3. *Resolution & Closure* \n' + steps
+        update['update']['comment'].append(comment)
+        update_ticket_response = requests.post('https://jira.jumia.com/rest/api/latest/issue/' + issue_key + '/transitions', data=json.dumps(update), headers=headers, auth=(user, api_key))
+    
+    else:
+        # EDIT SECURITY IMPACT AND URGENCY ACCORDING TO CROWDSTRIKE (Edit Issue)
+        if severity == 'Low':
+            update = {"fields": {"customfield_15012": {"value": "4 - Low"}, "customfield_15008": {"value": "4 - Low"}}}
+        elif severity == 'Medium':
+            update = {"fields": {"customfield_15012": {"value": "3 - Medium"}, "customfield_15008": {"value": "3 - Medium"}}}
+        elif severity == 'High':
+            update = {"fields": {"customfield_15012": {"value": "2 - High"}, "customfield_15008": {"value": "2 - High"}}}
+        elif severity == 'Critical':
+            update = {"fields": {"customfield_15012": {"value": "1 - Critical"}, "customfield_15008": {"value": "1 - Critical"}}}
+        update_ticket_response = requests.put('https://jira.jumia.com/rest/api/latest/issue/' + issue_key, data=json.dumps(update), headers=headers, auth=(user, api_key))
+        # Input a commentary to trigger the Jira's Priority Automation
+        update = {}
+        comment = 'h3. *Priority Update*\nCrowdstrike detected the priority of the incident as ' + severity
+        update['body'] = {}
+        update['body'] = comment
+        update_ticket_response = requests.post('https://jira.jumia.com/rest/api/latest/issue/' + issue_key + '/comment', data=json.dumps(update), headers=headers, auth=(user, api_key))
+    
+    return description, severity
