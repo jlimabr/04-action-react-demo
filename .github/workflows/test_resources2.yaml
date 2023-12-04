@@ -8,15 +8,25 @@ jobs:
         - name: Get code
           uses: actions/checkout@v4
 
-        - name: Test Files
+        - name: Cat File
           run: |
             cd ./src/wazuh/wazuh_managers/integrations
             printf "\n\n=============== List files ================\n"
             ls -a
-            printf "\n\n=============== clear file ================\n"
-            truncate -s 0 custom-opsgenie
             printf "\n\n=============== custom-opsgenie ================\n"
             cat custom-opsgenie
 
+        - name: Truncate File
+          run: |
+            cd ./src/wazuh/wazuh_managers/integrations
+            truncate -s 0 custom-opsgenie
+
+        - name: After Truncate File
+          run: |
+            cd ./src/wazuh/wazuh_managers/integrations
+            printf "\n\n=============== List files ================\n"
+            ls -a
+            printf "\n\n=============== custom-opsgenie ================\n"
+            cat custom-opsgenie
 
 
