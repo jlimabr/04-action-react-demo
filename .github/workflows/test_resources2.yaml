@@ -15,10 +15,18 @@ jobs:
           run: |
             cp -R ./src/wazuh/certs/_stg/* ./src/wazuh/certs/
 
-        # - name: delete folders
-        #   run: |
-        #     rmdir ./src/wazuh/certs/_stg/
-        #     rmdir ./src/wazuh/certs/_prd/
+        - name: delete folders
+          run: |
+            rmdir ./src/wazuh/certs/_prd/
+
+        - name: List Files STG
+          run: |
+            printf "\n\n=============== Folders STG ================\n"
+            ls -a ./src/wazuh/certs/_stg/
+            printf "\n\n=============== Files STG dashboard_http ================\n"
+            ls -a ./src/wazuh/certs/_stg/dashboard_http
+            printf "\n\n=============== Files STG indexer_cluster ================\n"
+            ls -a ./src/wazuh/certs/_stg/indexer_cluster
 
         - name: List Files After
           run: |
