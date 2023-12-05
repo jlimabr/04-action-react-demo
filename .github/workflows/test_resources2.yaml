@@ -8,25 +8,45 @@ jobs:
         - name: Get code
           uses: actions/checkout@v4
 
-        - name: Cat File
+        - name: List Files
           run: |
-            cd ./src/wazuh/wazuh_managers/integrations
-            printf "\n\n=============== List files ================\n"
+            cd ./src/wazuh/certs/
             ls -a
-            printf "\n\n=============== custom-opsgenie ================\n"
-            cat custom-opsgenie
 
-        - name: Truncate File
-          run: |
-            cd ./src/wazuh/wazuh_managers/integrations
-            truncate -s 0 custom-opsgenie
+        - name: copy file
+          uses: canastro/copy-file-action@master
+          with:
+            source: "src/wazuh/certs/_stg/**"
+            target: "src/wazuh/certs/"
 
-        - name: After Truncate File
+        - name: List Files
           run: |
-            cd ./src/wazuh/wazuh_managers/integrations
-            printf "\n\n=============== List files ================\n"
+            cd ./src/wazuh/certs/
             ls -a
-            printf "\n\n=============== custom-opsgenie ================\n"
-            cat custom-opsgenie
+
+
+        # - name: Cat File
+        #   run: |
+        #     cd ./src/wazuh/wazuh_managers/integrations
+        #     printf "\n\n=============== List files ================\n"
+        #     ls -a
+        #     printf "\n\n=============== custom-opsgenie ================\n"
+        #     cat custom-opsgenie
+
+        # - name: Truncate File
+        #   run: |
+        #     cd ./src/wazuh/wazuh_managers/integrations
+        #     truncate -s 0 custom-opsgenie
+        #     truncate -s 0 custom-slack
+
+        # - name: After Truncate File
+        #   run: |
+        #     cd ./src/wazuh/wazuh_managers/integrations
+        #     printf "\n\n=============== List files ================\n"
+        #     ls -a
+        #     printf "\n\n=============== custom-opsgenie ================\n"
+        #     cat custom-opsgenie
+
+        
 
 
