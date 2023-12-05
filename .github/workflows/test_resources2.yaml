@@ -16,8 +16,8 @@ jobs:
         - name: copy file
           uses: canastro/copy-file-action@master
           with:
-            source: "src/wazuh/certs/_stg/**"
-            target: "src/wazuh/certs/"
+            source: "./src/wazuh/certs/_stg/"
+            target: "./src/wazuh/certs/"
 
         - name: List Files
           run: |
