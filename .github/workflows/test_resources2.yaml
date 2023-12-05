@@ -9,18 +9,25 @@ jobs:
           uses: actions/checkout@v4
 
         - name: List Files
-          run: |
-            cd ./src/wazuh/certs/
-            ls -a
+          run: ls -a ./src/wazuh/certs/
 
         - name: copy file
           run: |
             cp -R ./src/wazuh/certs/_stg/* ./src/wazuh/certs/
 
+        - name: copy file
+          run: |
+            rmdir -R ./src/wazuh/certs/_stg/
+            rmdir -R ./src/wazuh/certs/_prd/
+
         - name: List Files After
           run: |
-            cd ./src/wazuh/certs/
-            ls -a
+            printf "\n\n=============== Folders ================\n"
+            ls -a ./src/wazuh/certs/
+            printf "\n\n=============== Files dashboard_http ================\n"
+            ls -a ./src/wazuh/certs/dashboard_http
+            printf "\n\n=============== Files indexer_cluster ================\n"
+            ls -a ./src/wazuh/certs/indexer_cluster
 
 
         # - name: Cat File
