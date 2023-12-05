@@ -13,7 +13,7 @@ jobs:
 
         - name: copy folders
           run: |
-            cp -R ./src/wazuh/certs/_stg/* ./src/wazuh/certs/
+            cp -R ./src/wazuh/certs/_stg/ ./src/wazuh/certs/
 
         - name: delete folders
           run: |
