@@ -14,12 +14,10 @@ jobs:
             ls -a
 
         - name: copy file
-          uses: canastro/copy-file-action@master
-          with:
-            source: "./src/wazuh/certs/_stg/"
-            target: "./src/wazuh/certs/"
+          run: |
+            cp -R ./src/wazuh/certs/_stg/* ./src/wazuh/certs/
 
-        - name: List Files
+        - name: List Files After
           run: |
             cd ./src/wazuh/certs/
             ls -a
