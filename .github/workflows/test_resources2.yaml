@@ -15,10 +15,10 @@ jobs:
           run: |
             cp -R ./src/wazuh/certs/_stg/* ./src/wazuh/certs/
 
-        # - name: delete folders
-        #   run: |
-        #     rmdir ./src/wazuh/certs/_stg/
-        #     rmdir ./src/wazuh/certs/_prd/
+        - name: delete folders
+          run: |
+            rm -R ./src/wazuh/certs/_stg
+            rm -R ./src/wazuh/certs/_prd
 
         - name: List Files STG
           run: |
