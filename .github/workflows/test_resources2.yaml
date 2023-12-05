@@ -13,12 +13,12 @@ jobs:
 
         - name: copy folders
           run: |
-            cp -R ./src/wazuh/certs/_stg/ ./src/wazuh/certs/
+            cp -R ./src/wazuh/certs/_stg/* ./src/wazuh/certs/
 
-        - name: delete folders
-          run: |
-            rmdir ./src/wazuh/certs/_stg/
-            rmdir ./src/wazuh/certs/_prd/
+        # - name: delete folders
+        #   run: |
+        #     rmdir ./src/wazuh/certs/_stg/
+        #     rmdir ./src/wazuh/certs/_prd/
 
         - name: List Files After
           run: |
